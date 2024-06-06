@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
-import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+
+import { UserResolver } from './user.resolver';
+import { PrismaService } from '../../../prisma/Prisma.service';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
@@ -14,7 +16,7 @@ import { JwtService } from '@nestjs/jwt';
       },
     }),
   ],
-  controllers: [UsersController],
-  providers: [UsersService, ConfigService, JwtService],
+  controllers: [],
+  providers: [UsersService, ConfigService, JwtService, PrismaService, UserResolver],
 })
 export class UsersModule {}
